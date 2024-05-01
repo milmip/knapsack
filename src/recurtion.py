@@ -21,35 +21,23 @@ class BruteforceKnapsackSolver(KnapsackSolver):
     def __init__(self, instance) -> None:
         # TODO: write the constructor by calling the parent class constructor
         super().__init__(instance)
-
-    @staticmethod
-    def _all_solutions(n):
-        sols = [None] * 2**n
+    
+    def _kp(self, weights=None, values=None, capacity=None):
+        if weights is None: 
+            weights = self._inst.W
         
-        for i in range(2**n):
-            bits = bin(i)[2:]
-            k = n - len(bits)
-            bits = k * "0" + bits
-            sols[i] = tuple([int(b) for b in bits])
+        if values is None: 
+            values = self._inst.V
         
-        return sols
+        if capacity is None: 
+            capacity = self._inst.C
+        
+        
+        
     
     def solve(self) -> tuple[int, ...]:
         # solve by brute force
-        solutions = BruteforceKnapsackSolver._all_solutions(self._inst.size)
-        
-        max = 0
-        solMax = None
-        for sol in solutions:
-            if self.weight(sol) <= self._inst.C:
-                val = self.value(sol)
-                if val > max:
-                    max = val
-                    solMax = sol
-        
-        
-        return solMax
-    
+        ...  
 try:
     import doctest
     doctest.testmod()
